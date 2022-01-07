@@ -22,10 +22,10 @@ export const Home = () => {
     useEffect(() => {
         Reddit.getSubredditPosts(selectedSub).then(result => {
             //console.log(result)
-            console.log('what1')
+            //console.log('what1')
             const res = result.toJSON()
             console.log(res)
-            console.log('what2')
+            //console.log('what2')
             //const res = JSON.stringify(result)
             dispatch(setPosts(res));
 
@@ -42,7 +42,7 @@ export const Home = () => {
     /*if(posts.length>0){
         testPost=<Post post={posts[0]}/>
     }*/
-    console.log(postComponents)
+    //console.log(postComponents)
     return (
         <main className="home">
             <ul>

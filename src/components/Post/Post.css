@@ -43,7 +43,7 @@
 }
 .post img{
     height:auto;
-    width:60%;
+    width:40%;
     margin-bottom:25px;
 }
 .post body{
@@ -54,6 +54,12 @@
     display:flex;
 }
 .post-details{
+    display:flex;
+    justify-content: space-between;
     border-top: 1px solid #e6e6e6;
     padding-top: 5px;
+}
+.post a{
+    color: #444444;
+    text-decoration: none;
 }
