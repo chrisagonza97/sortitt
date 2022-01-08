@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './Home.css';
+import './SearchPosts.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Reddit from '../../api/Reddit'
 import { setPosts } from '../../store/redditSlice'
 import { Post } from '../../components/Post/Post'
 
 
-export const Home = () => {
+export const SearchPosts = () => {
     //first time Home gets rendered, there will be 0 Post components rendered but immediately
     //posts from popular will be fetched and rendered after
     const posts = useSelector((state) => state.reddit.posts)

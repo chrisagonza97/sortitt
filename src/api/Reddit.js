@@ -15,6 +15,7 @@ const Reddit = {
         const retPost = await r.getSubreddit(subreddit).getHot()
         return retPost
     }
+    
 }
 
 export default Reddit;

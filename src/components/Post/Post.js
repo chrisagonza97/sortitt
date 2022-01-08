@@ -19,11 +19,11 @@ export const Post = (props) => {
                     <div className="upvotes-wrapper">
                         <div className="upvotes">
 
-                            <i className="fas fa-arrow-up vote-up"></i>
+                            <i className="fas fa-arrow-up fa-2x vote-up"></i>
+                            
+                            <span className="ups-num"><strong>{props.post.ups}</strong></span>
 
-                            {props.post.ups}
-
-                            <i className="fas fa-arrow-down vote-down"></i>
+                            <i className="fas fa-arrow-down fa-2x vote-down"></i>
 
                         </div>
                     </div>
@@ -39,7 +39,7 @@ export const Post = (props) => {
                 </div>
                 <div className="post-details">
                     <span>/r/{props.post.subreddit} </span>
-                    <span>/u/{props.post.author} </span>
+                    <span>Posted by /u/{props.post.author} </span>
                     <span>Posted on: {Time.utcToDate(props.post.created_utc)}, {Time.utcToAgo(props.post.created_utc)} </span>
                 </div>
             </a>

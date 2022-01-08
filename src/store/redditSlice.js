@@ -3,26 +3,28 @@ import { createSlice, createSelector } from '@reduxjs/toolkit';
 
 const initialState ={
     posts: [],
-    searchTerm: '',
-    selectedSub: 'popular'
+    
+    selectedSub: 'all',
+    rendering: 'allSubredditPosts'
 }
 
 const redditSlice = createSlice({
     name: 'redditPosts',
     initialState,
     reducers:{
-        setSearchTerm(state, action) {
-            state.searchTerm=action.payload
-        },
+        
         setPosts(state,action){
             state.posts=action.payload
+        },
+        setRendering(state,action){
+            state.rendering=action.payload
         }
     }
 })
 
 export const {
-    setSearchTerm,
-    setPosts
+    setPosts,
+    setRendering
 } = redditSlice.actions;
 
 export default redditSlice.reducer
