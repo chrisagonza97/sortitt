@@ -3,6 +3,7 @@ import './App.css';
 import {Header} from  './features/Header/Header';
 import {Home} from './features/Home/Home';
 import { SearchPosts } from './features/SearchPosts/SearchPosts'
+import { SearchSubs } from './features/SearchSubs/SearchSubs'
 import { useSelector } from 'react-redux'
 
 function App() {
@@ -13,6 +14,9 @@ function App() {
   }
   else if(rendering==='searchAllPosts'||rendering==='searchInSubreddit'){
     main=<SearchPosts/>
+  }
+  else if(rendering=== 'searchSubreddits' ){
+    main = <SearchSubs/>
   }
 
   

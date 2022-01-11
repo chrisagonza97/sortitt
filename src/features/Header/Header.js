@@ -27,6 +27,9 @@ export const Header = () => {
         //first set state search term to the local search searchTerm
         //then set state's posts to search results
         e.preventDefault();
+        if(searchTermLocal===''){
+            return
+        }
         dispatch(setSearchTerm(searchTermLocal))
         let searchPosts;
         let searchThisSub;
