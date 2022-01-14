@@ -4,7 +4,11 @@ const initialState= {
     searchTerm:'',
     searchPosts:true,
     searchThisSub:false,
-    searchSubreddits: false
+    searchSubreddits: false,
+    beforeDate:'',
+    afterDate:'',
+    beforeSearch:false,
+    afterSearch:false
 }
 
 const searchSlice = createSlice({
@@ -22,6 +26,18 @@ const searchSlice = createSlice({
         },
         setSearchTerm(state, action) {
             state.searchTerm=action.payload
+        },
+        setBeforeDate(state,action){
+            state.beforeDate=action.payload
+        },
+        setAfterDate(state,action){
+            state.afterDate=action.payload;
+        },
+        setBeforeSearch(state, action){
+            state.beforeSearch = action.payload
+        },
+        setAfterSearch(state,action){
+            state.afterSearch = action.payload
         }
     }
 })
@@ -30,7 +46,9 @@ export const{
     setSearchPosts,
     setSearchThisSub,
     setSearchSubreddits,
-    setSearchTerm
+    setSearchTerm,
+    setBeforeDate,
+    setAfterDate
 } = searchSlice.actions;
 
 export default searchSlice.reducer

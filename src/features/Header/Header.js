@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import { setSearchTerm } from '../../store/redditSlice';
-import { setSearchPosts, setSearchThisSub, setSearchSubreddits, setSearchTerm } from '../../store/searchSlice'
-import {  setRendering } from '../../store/redditSlice'
+import { setSearchPosts, setSearchThisSub, setSearchSubreddits, setSearchTerm, setBeforeDate, setAfterDate } from '../../store/searchSlice'
+import { setRendering, setSelectedSub } from '../../store/redditSlice'
 import { BsSearch } from "react-icons/bs";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
 import './Header.css'
 
 export const Header = () => {
     const [searchTermLocal, setSearchTermLocal] = useState('')
+    const [beforeDate, setBeforeDate] = useState(new Date());
+    const [afterDate, setAfterDate] = useState(new Date());
+    const [checkBefore, setCheckBefore] = useState(false);
+    const [checkAfter, setCheckAfter] = useState(false)
     const searchTerm = useSelector((state) => state.search.searchTerm)
-    const subreddit = useSelector((state)=> state.reddit.selectedSub)
+    const subreddit = useSelector((state) => state.reddit.selectedSub)
     const dispatch = useDispatch();
 
-    const [selectedRadio, setSelectedRadio]=useState('searchPosts')
-    const [searchSub,setSearchSub]=useState(true)
+    const [selectedRadio, setSelectedRadio] = useState('searchPosts')
+    const [searchSub, setSearchSub] = useState(true)
 
     const handleChange = (e) => {
         setSearchTermLocal(e.target.value)
@@ -23,11 +29,16 @@ export const Header = () => {
         setSearchTermLocal(searchTerm);
     }, [searchTerm]);
 
+    const handleSnooClick = () => {
+        dispatch(setSelectedSub('all'))
+        dispatch(setRendering('allSubredditPosts'))
+    }
+
     const handleSubmit = (e) => {
         //first set state search term to the local search searchTerm
         //then set state's posts to search results
         e.preventDefault();
-        if(searchTermLocal===''){
+        if (searchTermLocal === '') {
             return
         }
         dispatch(setSearchTerm(searchTermLocal))
@@ -35,44 +46,53 @@ export const Header = () => {
         let searchThisSub;
         let searchSubreddits;
 
-        if (selectedRadio==='searchPosts'){
-            searchPosts=true;
-            searchSubreddits=false;
-            if(searchSub){
+        if (selectedRadio === 'searchPosts') {
+            searchPosts = true;
+            searchSubreddits = false;
+            if (searchSub) {
                 searchThisSub = true;
                 dispatch(setRendering('searchInSubreddit'))
             }
-            else{
+            else {
                 searchThisSub = false;
                 dispatch(setRendering('searchAllPosts'))
             }
         }
-        else{
-            searchPosts=false;
-            searchThisSub=false;
-            searchSubreddits=true;
+        else {
+            searchPosts = false;
+            searchThisSub = false;
+            searchSubreddits = true;
             dispatch(setRendering('searchSubreddits'))
         }
         dispatch(setSearchPosts(searchPosts))
         dispatch(setSearchThisSub(searchThisSub))
         dispatch(setSearchSubreddits(searchSubreddits))
     }
+    
     const onRadioChange = (e) => {
         setSelectedRadio(e.target.value);
-        if(e.target.value=='searchSubs'){
+        if (e.target.value == 'searchSubs') {
             setSearchSub(false)
         }
     }
     const onCheckClick = (e) => {
-        if(selectedRadio=='searchSubs'){
+        if (selectedRadio == 'searchSubs') {
             setSelectedRadio('searchPosts')
         }
         setSearchSub(!searchSub)
     }
-
+    const handleBeforeCheck = (e) =>{
+        setCheckBefore(!checkBefore)
+    }
+    const handleAfterCheck = (e) =>{
+        setCheckAfter(!checkAfter)
+    }
     return (
         <div className="header">
-            <img src={require('./redditsnoo.jpg')} alt="snoo logo" />
+            <div className="snoo-img-container">
+                <img className="snoo-img" onClick={handleSnooClick} src={require('./redditsnoo.jpg')} alt="snoo logo" />
+                <span className="snoo-tooltip">Go Back To /r/all</span>
+            </div>
             <form className="searchBar" onSubmit={handleSubmit} >
                 <div className="input-container">
                     <input
@@ -83,27 +103,54 @@ export const Header = () => {
                         onChange={handleChange}
                     />
                     <button type="submit" onClick={handleSubmit}>
-                        
-                        <BsSearch/>
-                    </button>
-                    </div>
-                <div className = "search-posts-container">
-                    <div className = "search-posts">
-                        <input className="form-check-input" onChange={onRadioChange} checked={selectedRadio=='searchPosts'} type="radio" name="posts-or-subs-buttons" id="inlineRadio1" value="searchPosts" />
-                        <label className="form-check-label" htmlFor="inlineRadio1">Search reddit Posts</label>
-                    </div>
-                    <div className='subreddit-check'>
-                        <input className="form-check-input" onChange={onCheckClick} type="checkbox" checked={searchSub} value='searchSub' id="defaultCheck1" />
-                        <label className="form-check-label" htmlFor="defaultCheck1">
-                            Search /r/{subreddit}
-                        </label>
-                    </div>
-                </div>
 
-                <input className="form-check-input" type="radio" onChange={onRadioChange} checked={selectedRadio=='searchSubs'} name="posts-or-subs-buttons" id="inlineRadio2" value="searchSubs" />
-                <label className="form-check-label" htmlFor="inlineRadio2">Search Subreddits</label>
-                
+                        <BsSearch />
+                    </button>
+                </div>
+                {/*<div className='search-params'>*/}
+                <div className="search-posts-container">
+                    <div className='if-subreddit'>
+                        <div className="search-posts">
+                            <input className="form-check-input" onChange={onRadioChange} checked={selectedRadio == 'searchPosts'} type="radio" name="posts-or-subs-buttons" id="inlineRadio1" value="searchPosts" />
+                            <label className="form-check-label" htmlFor="inlineRadio1">Search reddit Posts</label>
+                        </div>
+                        <div className='subreddit-check'>
+                            <input className="form-check-input" onChange={onCheckClick} type="checkbox" checked={searchSub} value='searchSub' id="defaultCheck1" />
+                            <label className="form-check-label" htmlFor="defaultCheck1">
+                                Search /r/{subreddit}
+                            </label>
+                        </div>
+                    </div>
+                    <div className='calendar-inputs'>
+                        <div className="calendar-before">
+                            <label htmlFor="before-checkbox">
+                                Before
+                            </label>
+                            <input type="checkbox" onChange={handleBeforeCheck} checked={checkBefore} id="before-checkbox" />
+                            <DatePicker onChange={(date) => setBeforeDate(date)} selected={beforeDate} />
+                        </div>
+                        <div className="calendar-after">
+                            <label htmlFor="after-checkbox">
+                                After
+                            </label>
+                            <input type="checkbox" onChange={handleAfterCheck} checked={checkAfter} id="after-checkbox" />
+                            <DatePicker onChange = {(date) => setAfterDate(date)} selected={afterDate} />
+                        </div>
+                    </div>
+                    <div className = "search-subs-butn">
+                        <input className="form-check-input" type="radio" onChange={onRadioChange} checked={selectedRadio == 'searchSubs'} name="posts-or-subs-buttons" id="inlineRadio2" value="searchSubs" />
+                        <label className="form-check-label" htmlFor="inlineRadio2">Search Subreddits</label>
+                    </div>
+                    
+                </div>
+                {/*</div>*/}
+
+
+
+
+
             </form>
+            
         </div>
     )
 }

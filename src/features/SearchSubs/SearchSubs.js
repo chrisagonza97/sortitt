@@ -57,6 +57,7 @@ export const SearchSubs = () => {
     //console.log(postComponents)
     return (
         <main className="home">
+            
             <ul>
 
                 {postComponents}

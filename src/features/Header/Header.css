@@ -18,9 +18,60 @@
 }
 .search-posts-container{
     margin: 0 1rem;
-    display: inline-flex;
-    flex-direction: column;
+    
+    display: grid;
+    grid-template-columns: auto auto auto;
 }
 .subreddit-check{
     display:inline-block;
+}
+.snoo-tooltip{
+    position:absolute;
+    bottom: -20px;
+    left: 70px;
+    min-width: 9rem;
+    padding: .2rem .2rem;
+    display: none;
+    background-color: #efefefd8;
+    border: .1px solid black;
+    opacity: .8;
+    text-align: center;
+}
+.snoo-img-container{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+.snoo-img-container:hover > .snoo-tooltip{
+    display: block;
+}
+.search-params{
+    display: inline-flex;
+    flex-direction: column;
+}
+.calendar-inputs{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+.calendar-before{
+    display: grid;
+    grid-template-columns: 3rem 1rem 10rem;
+}
+.calendar-after{
+    display: grid;
+    grid-template-columns: 3rem 1rem 3rem;
+}
+.if-subreddit{
+    
+}
+.searchBar{
+    display:grid;
+    grid-template-columns: 15rem auto auto ;
+}
+.calendar-inputs{
+    max-width:11rem;
+}
+.search-subs-butn{
+    padding-left: 7rem;
 }

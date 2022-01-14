@@ -1,7 +1,7 @@
 .subreddit-card{
     display: grid;
     grid-template-columns: 100px auto auto;
-    height: 6rem;
+    min-height: 6rem;
     background-color:#ffffff;
     border-radius:10px;
     margin-bottom: 30px;
@@ -19,4 +19,7 @@
 .sub-text-wrapp{
     display: grid;
     grid-template-rows: 1fr 1fr;
+}
+.subreddit-card:hover{
+    cursor:pointer;
 }

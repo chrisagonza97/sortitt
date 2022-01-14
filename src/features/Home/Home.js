@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Reddit from '../../api/Reddit'
 import { setPosts } from '../../store/redditSlice'
 import { Post } from '../../components/Post/Post'
+import { Subreddit } from '../../components/Subreddit/Subreddit'
 
 
 export const Home = () => {
@@ -30,7 +31,7 @@ export const Home = () => {
             dispatch(setPosts(res));
 
         })
-    }, [])
+    }, [selectedSub])
     //let testPost;
     const postComponents = posts.map((post, index) => {
        return (
@@ -45,6 +46,7 @@ export const Home = () => {
     //console.log(postComponents)
     return (
         <main className="home">
+            <Subreddit subreddit={selectedSub}/>
             <ul>
                 
                 {postComponents}

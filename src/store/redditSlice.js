@@ -21,6 +21,9 @@ const redditSlice = createSlice({
         },
         setSubreddits(state,action){
             state.subreddits = action.payload
+        },
+        setSelectedSub(state,action){
+            state.selectedSub = action.payload
         }
     }
 })
@@ -28,7 +31,8 @@ const redditSlice = createSlice({
 export const {
     setPosts,
     setRendering,
-    setSubreddits
+    setSubreddits,
+    setSelectedSub
 } = redditSlice.actions;
 
 export default redditSlice.reducer
