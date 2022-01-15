@@ -30,6 +30,16 @@ const Reddit = {
         })
         return searchResults
     },
+    async searchAllRedditBefore(query,beforeDate){
+        const r = new snoowrap({
+            userAgent: 'search-all-reddit-before',
+            clientId: CLIENT_ID,
+            clientSecret: CLIENT_SECRET,
+            refreshToken: REFRESH_TOKEN
+        })
+        
+
+    },
     //method to search through a specific subreddit's posts
     async searchThroughSubreddit(query,subreddit){
         const r = new snoowrap({
@@ -48,7 +58,7 @@ const Reddit = {
 
     async searchForSubreddits(query){
         const r = new snoowrap({
-            userAgent: 'search-a-subreddit',
+            userAgent: 'search-for-subreddit',
             clientId: CLIENT_ID,
             clientSecret: CLIENT_SECRET,
             refreshToken: REFRESH_TOKEN

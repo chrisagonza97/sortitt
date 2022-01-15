@@ -13,8 +13,12 @@ export const SearchPosts = () => {
     const posts = useSelector((state) => state.reddit.posts)
     const selectedSub = useSelector((state) => state.reddit.selectedSub)
     const searchTerm = useSelector((state) => state.search.searchTerm)
-    const dispatch = useDispatch();
     const searchThisSub = useSelector((state) => state.search.searchThisSub)
+    const beforeSearch = useSelector((state) => state.search.beforeSearch)
+    const afterSearch = useSelector((state) => state.search.afterSearch)
+    const beforeDate = useSelector((state) => state.search.beforeDate)
+    const afterDate = useSelector((state) => state.search.afterDate)
+    const dispatch = useDispatch();
     //getPosts('popular').then(result=>{console.log(result)})
     //Reddit.getSubredditPosts('popular').then(console.log)
 
@@ -24,28 +28,82 @@ export const SearchPosts = () => {
     //useEffect is to fetch posts on first render
     useEffect(() => {
         if (searchThisSub === false) {
-            Reddit.searchAllReddit(searchTerm).then(result => {
-                //console.log(result)
-                //console.log('what1')
-                const res = result.toJSON()
-                console.log(res)
-                //console.log('what2')
-                //const res = JSON.stringify(result)
-                dispatch(setPosts(res));
-
-            })
+            //if neither before or after a date
+            if(beforeSearch===false && afterSearch===false){
+                Reddit.searchAllReddit(searchTerm).then(result => {
+                    //console.log(result)
+                    //console.log('what1')
+                    const res = result.toJSON()
+                    console.log(res)
+                    //console.log('what2')
+                    //const res = JSON.stringify(result)
+                    dispatch(setPosts(res));
+    
+                })
+            }            
+            //if only before a date
+            else if( beforeSearch === true && afterSearch===false){
+                Reddit.searchAllRedditBefore(searchTerm, beforeDate).then(result =>{
+                    const res = result.toJSON()
+    
+                    dispatch(setPosts(res))
+                })
+            }
+            //if only after a date
+            else if( afterSearch === false && beforeSearch===true){
+                Reddit.searchAllRedditAfter(searchTerm, afterDate).then(result =>{
+                    const res = result.toJSON()
+    
+                    dispatch(setPosts(res))
+                })
+            }
+            //if both before and after a date
+            else if( afterSearch === true && beforeSearch===true){
+                Reddit.searchAllRedditBeforeAfter(searchTerm, beforeDate,afterDate).then(result =>{
+                    const res = result.toJSON()
+    
+                    dispatch(setPosts(res))
+                })
+            }
         }
         else{
-            Reddit.searchThroughSubreddit(searchTerm,selectedSub).then(result => {
-                //console.log(result)
-                //console.log('what1')
-                const res = result.toJSON()
-                console.log(res)
-                //console.log('what2')
-                //const res = JSON.stringify(result)
-                dispatch(setPosts(res));
-
-            })
+            //if neither before or after a date
+            if(beforeSearch===false && afterSearch===false){
+                Reddit.searchThroughSubreddit(searchTerm,selectedSub).then(result => {
+                    //console.log(result)
+                    //console.log('what1')
+                    const res = result.toJSON()
+                    console.log(res)
+                    //console.log('what2')
+                    //const res = JSON.stringify(result)
+                    dispatch(setPosts(res));
+    
+                })
+            }
+            //if only before a date
+            else if( beforeSearch === true && afterSearch===false){
+                Reddit.searchThroughSubredditBefore(searchTerm,selectedSub,beforeDate).then(result => {
+                    const res = result.toJSON()
+                    dispatch(setPosts(res));
+    
+                })
+            }
+            //if only after a date
+            else if(beforeSearch === false && afterSearch===true){
+                Reddit.searchThroughSubredditAfter(searchTerm,selectedSub,afterDate).then(result => {
+                    const res = result.toJSON()
+                    dispatch(setPosts(res));
+    
+                })
+            }
+            //if both before and after a date
+            else if(beforeSearch === true && afterSearch===true){
+                Reddit.searchThroughSubredditBeforeAfter(searchTerm,selectedSub,beforeDate,afterDate).then(result => {
+                    const res = result.toJSON()
+                    dispatch(setPosts(res));
+    
+                })
+            }
         }
 
     }, [searchTerm,selectedSub,searchThisSub])

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import { setSearchTerm } from '../../store/redditSlice';
-import { setSearchPosts, setSearchThisSub, setSearchSubreddits, setSearchTerm, setBeforeDate, setAfterDate } from '../../store/searchSlice'
+import { setSearchPosts, setSearchThisSub, setSearchSubreddits, setSearchTerm, setBeforeDate, setAfterDate, setBeforeSearch, setAfterSearch } from '../../store/searchSlice'
 import { setRendering, setSelectedSub } from '../../store/redditSlice'
 import { BsSearch } from "react-icons/bs";
 import DatePicker from "react-datepicker";
@@ -10,8 +10,8 @@ import './Header.css'
 
 export const Header = () => {
     const [searchTermLocal, setSearchTermLocal] = useState('')
-    const [beforeDate, setBeforeDate] = useState(new Date());
-    const [afterDate, setAfterDate] = useState(new Date());
+    const [beforeDate, setBeforeD] = useState(new Date());
+    const [afterDate, setAfterD] = useState(new Date());
     const [checkBefore, setCheckBefore] = useState(false);
     const [checkAfter, setCheckAfter] = useState(false)
     const searchTerm = useSelector((state) => state.search.searchTerm)
@@ -64,6 +64,23 @@ export const Header = () => {
             searchSubreddits = true;
             dispatch(setRendering('searchSubreddits'))
         }
+        //console.log(beforeDate)
+        //set before date to beginning of day utc
+        beforeDate.setUTCHours(0,0,0,0)
+        let newBefore = beforeDate
+        setBeforeD(newBefore)
+        //set after date to end of day utc 
+        afterDate.setUTCHours(23,59,59,0)
+        let newAfter = afterDate
+        setAfterD(newAfter)
+        console.log(parseInt((beforeDate.getTime() / 1000).toFixed(0)))
+        dispatch(setBeforeDate(parseInt((beforeDate.getTime() / 1000).toFixed(0))))
+        
+        dispatch(setAfterDate(parseInt((afterDate.getTime() / 1000).toFixed(0))))
+        console.log(parseInt((afterDate.getTime() / 1000).toFixed(0)))
+        dispatch(setBeforeSearch(checkBefore))
+        
+        dispatch(setAfterSearch(checkAfter))
         dispatch(setSearchPosts(searchPosts))
         dispatch(setSearchThisSub(searchThisSub))
         dispatch(setSearchSubreddits(searchSubreddits))
@@ -86,6 +103,7 @@ export const Header = () => {
     }
     const handleAfterCheck = (e) =>{
         setCheckAfter(!checkAfter)
+        
     }
     return (
         <div className="header">
@@ -127,14 +145,14 @@ export const Header = () => {
                                 Before
                             </label>
                             <input type="checkbox" onChange={handleBeforeCheck} checked={checkBefore} id="before-checkbox" />
-                            <DatePicker onChange={(date) => setBeforeDate(date)} selected={beforeDate} />
+                            <DatePicker onChange={(date) => setBeforeD(date)} selected={beforeDate} />
                         </div>
                         <div className="calendar-after">
                             <label htmlFor="after-checkbox">
                                 After
                             </label>
                             <input type="checkbox" onChange={handleAfterCheck} checked={checkAfter} id="after-checkbox" />
-                            <DatePicker onChange = {(date) => setAfterDate(date)} selected={afterDate} />
+                            <DatePicker onChange = {(date) => setAfterD(date)} selected={afterDate} />
                         </div>
                     </div>
                     <div className = "search-subs-butn">

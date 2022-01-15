@@ -48,7 +48,9 @@ export const{
     setSearchSubreddits,
     setSearchTerm,
     setBeforeDate,
-    setAfterDate
+    setAfterDate,
+    setBeforeSearch,
+    setAfterSearch
 } = searchSlice.actions;
 
 export default searchSlice.reducer
