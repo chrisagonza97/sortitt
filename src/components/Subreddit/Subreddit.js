@@ -25,36 +25,7 @@ export const Subreddit = (props) => {
             })
         }
         
-        /*if (subredditObject) {
-            if (subredditObject.hasOwnProperty('community_icon')) {
-                if (subredditObject.community_icon !== '') {
-                    setIcon(<img src={subredditObject.community_icon} alt="community-icon" />)
-                }
-                else {
-
-                }
-
-            }
-            else {
-
-
-            }
-
-            if (subredditObject.hasOwnProperty('public_description')) {
-                if (subredditObject.public_description !== '') {
-                    setDescription(<p className="sub-description">{subredditObject.public_description}</p>)
-                }
-                else {
-
-                }
-
-            }
-            else {
-
-            }
-            //console.log(subredditObject)
-
-        }*/
+        
     }, [props.subreddit])
 
     const handleSubClick = () =>{

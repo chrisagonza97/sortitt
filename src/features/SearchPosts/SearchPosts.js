@@ -29,6 +29,7 @@ export const SearchPosts = () => {
     useEffect(() => {
         if (searchThisSub === false) {
             //if neither before or after a date
+            console.log(beforeSearch+" here "+afterSearch)
             if(beforeSearch===false && afterSearch===false){
                 Reddit.searchAllReddit(searchTerm).then(result => {
                     //console.log(result)
@@ -50,7 +51,7 @@ export const SearchPosts = () => {
                 })
             }
             //if only after a date
-            else if( afterSearch === false && beforeSearch===true){
+            else if( afterSearch === true && beforeSearch===false){
                 Reddit.searchAllRedditAfter(searchTerm, afterDate).then(result =>{
                     const res = result.toJSON()
     
@@ -106,7 +107,7 @@ export const SearchPosts = () => {
             }
         }
 
-    }, [searchTerm,selectedSub,searchThisSub])
+    }, [searchTerm,selectedSub,searchThisSub,beforeDate,afterDate,beforeSearch,afterSearch])
     //let testPost;
     
     let postComponents = posts.map((post, index) => {
