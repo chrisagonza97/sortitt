@@ -13,6 +13,7 @@ const Reddit = {
       refreshToken: REFRESH_TOKEN,
     });
     const retPost = await r.getSubreddit(subreddit).getHot();
+    console.log(retPost)
     return retPost;
   },
   //method to search through all of reddit's posts'
