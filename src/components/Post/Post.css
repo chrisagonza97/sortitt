@@ -55,11 +55,18 @@
 .votes-title{
     display:flex;
 }
+.detail-subreddit{
+    margin-right: 12px;
+}
 .post-details{
     display:flex;
     justify-content: space-between;
     border-top: 1px solid #e6e6e6;
     padding-top: 5px;
+    
+}
+.post-details span {
+    font-size: 12px;
 }
 .post a{
     color: #444444;
@@ -68,4 +75,11 @@
 .ups-num{
     margin-top: 5px;
     margin-bottom:5px;
+}
+.post-grid-container{
+    display:grid;
+    grid-template-columns: 1fr auto 1fr;
+}
+.post-grid-two{
+    width: 25rem;
 }

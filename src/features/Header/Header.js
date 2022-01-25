@@ -142,7 +142,7 @@ export const Header = () => {
               <input
                 className='form-check-input'
                 onChange={onRadioChange}
-                checked={selectedRadio == 'searchPosts'}
+                checked={selectedRadio === 'searchPosts'}
                 type='radio'
                 name='posts-or-subs-buttons'
                 id='inlineRadio1'

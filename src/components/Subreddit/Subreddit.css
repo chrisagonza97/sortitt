@@ -1,25 +1,35 @@
-.subreddit-card{
-    display: grid;
-    grid-template-columns: 100px auto auto;
-    min-height: 6rem;
-    background-color:#ffffff;
-    border-radius:10px;
-    margin-bottom: 30px;
-    margin-right:20px;
-    margin-left: 20px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+.subreddit-card {
+  display: grid;
+  grid-template-columns: 100px auto auto;
+  min-height: 6rem;
+  width:100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+  margin-left: 20px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
-.sub-icon{
-    border-radius:50%;
-    height: 5.5rem;
+.sub-icon {
+  border-radius: 50%;
+  height: 5.5rem;
 }
-.subreddit-name{
-    display:inline;
+.subreddit-name {
+  display: inline;
 }
-.sub-text-wrapp{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+.sub-text-wrapp {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
-.subreddit-card:hover{
-    cursor:pointer;
+.subreddit-card:hover {
+  cursor: pointer;
+}
+.sub-grid-container {
+    display:grid;
+  grid-template-columns: 1fr 20fr 1fr;
+}
+.sub-grid-two {
+
+  
 }
