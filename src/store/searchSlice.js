@@ -8,7 +8,8 @@ const initialState= {
     beforeDate:'',
     afterDate:'',
     beforeSearch:false,
-    afterSearch:false
+    afterSearch:false,
+    safeSearch:true
 }
 
 const searchSlice = createSlice({
@@ -38,6 +39,9 @@ const searchSlice = createSlice({
         },
         setAfterSearch(state,action){
             state.afterSearch = action.payload
+        },
+        setSafeSearch(state,action){
+            state.safeSearch = action.payload
         }
     }
 })
@@ -50,7 +54,8 @@ export const{
     setBeforeDate,
     setAfterDate,
     setBeforeSearch,
-    setAfterSearch
+    setAfterSearch,
+    setSafeSearch
 } = searchSlice.actions;
 
 export default searchSlice.reducer

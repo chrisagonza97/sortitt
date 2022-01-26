@@ -11,6 +11,7 @@ export const Home = () => {
   //posts from popular will be fetched and rendered after
   const posts = useSelector((state) => state.reddit.posts);
   const selectedSub = useSelector((state) => state.reddit.selectedSub);
+  const nsfwFilter = useSelector((state)=> state.search.safeSearch)
   const dispatch = useDispatch();
   //getPosts('popular').then(result=>{console.log(result)})
   //Reddit.getSubredditPosts('popular').then(console.log)
@@ -23,16 +24,28 @@ export const Home = () => {
       //console.log(result)
       //console.log('what1')
       const res = result.toJSON();
-      console.log(res)
+      //console.log(res)
       //console.log('what2')
       //const res = JSON.stringify(result)
       dispatch(setPosts(res));
     });
-  }, [selectedSub]);
+  }, [selectedSub,nsfwFilter]);
   //let testPost;
-  const postComponents = posts.map((post, index) => {
-    return <Post key={index} post={post} />;
-  });
+  //.filter((post)=> post.over_18===false)
+  let postComponents;
+  if(nsfwFilter===false){
+    postComponents = posts.map((post, index) => {
+      return <Post key={index} post={post} />;
+    });
+  }
+  else{
+    postComponents = posts.filter((post)=> post.over_18===false).map((post, index) => {
+      return <Post key={index} post={post} />;
+    });
+  }
+  if(postComponents.length<1){
+    postComponents = "No Results Found"
+  }
   /*if(posts.length>0){
         testPost=<Post post={posts[0]}/>
     }*/

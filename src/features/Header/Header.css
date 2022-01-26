@@ -1,77 +1,90 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-size: 16px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
 }
-.header{
-    display: grid;
-    grid-template-columns: 100px auto;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+.header {
+  display: grid;
+  grid-template-columns: 100px auto;
 }
-.header img{
-    width: 100%;
+.header-container {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  padding-bottom: 0.5rem;
+  max-width: 100%;
 }
-.input-container{
-    margin-top: 1rem;
-    display: inline-block;
+.header img {
+  width: 100%;
+  border-radius: 50%;
 }
-.search-posts-container{
-    margin: 0 1rem;
-    
-    display: grid;
-    grid-template-columns: auto auto auto;
+.input-container {
+  margin-top: 1rem;
+  display: inline-block;
 }
-.subreddit-check{
-    display:inline-block;
+.input-container input{
+    width:75%
 }
-.snoo-tooltip{
-    position:absolute;
-    bottom: -20px;
-    left: 70px;
-    min-width: 9rem;
-    padding: .2rem .2rem;
-    display: none;
-    background-color: #efefefd8;
-    border: .1px solid black;
-    opacity: .8;
-    text-align: center;
+.search-posts-container {
+  margin: 0 1rem;
+
+  display: grid;
+  grid-template-columns: 3fr 1fr 3fr ;
 }
-.snoo-img-container{
-    position: relative;
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
+.subreddit-check {
+  display: inline-block;
 }
-.snoo-img-container:hover > .snoo-tooltip{
-    display: block;
+.date-picker{
+    max-width:6rem;
 }
-.search-params{
-    display: inline-flex;
-    flex-direction: column;
+.snoo-tooltip {
+  position: absolute;
+  bottom: -20px;
+  left: 70px;
+  min-width: 9rem;
+  padding: 0.2rem 0.2rem;
+  display: none;
+  background-color: #efefefd8;
+  border: 0.1px solid black;
+  opacity: 0.8;
+  text-align: center;
 }
-.calendar-inputs{
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+.snoo-img-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
 }
-.calendar-before{
-    display: grid;
-    grid-template-columns: 3rem 1rem 10rem;
+.snoo-img-container:hover > .snoo-tooltip {
+  display: block;
 }
-.calendar-after{
-    display: grid;
-    grid-template-columns: 3rem 1rem 3rem;
+.search-params {
+  display: inline-flex;
+  flex-direction: column;
 }
-.if-subreddit{
-    
+.calendar-inputs {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
 }
-.searchBar{
-    display:grid;
-    grid-template-columns: 15rem auto auto ;
+.calendar-before {
+  display: grid;
+  grid-template-columns: 3rem 1rem 10rem;
 }
-.calendar-inputs{
-    max-width:11rem;
+.calendar-after {
+  display: grid;
+  grid-template-columns: 3rem 1rem 3rem;
 }
-.search-subs-butn{
-    padding-left: 7rem;
+.if-subreddit {
+}
+.searchBar {
+  display: grid;
+  grid-template-columns: 12rem auto;
+}
+.calendar-inputs {
+  max-width: 11rem;
+}
+.search-subs-butn {
+  padding-left: 3rem;
+  display:grid;
+  grid-template-rows: 1fr 1fr;
 }

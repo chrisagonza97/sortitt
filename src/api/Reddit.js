@@ -1,5 +1,5 @@
-import snoowrap from "snoowrap";
-import { CLIENTID, CLIENTSECRET, REFRESHTOKEN } from "./config";
+import snoowrap from 'snoowrap';
+import { CLIENTID, CLIENTSECRET, REFRESHTOKEN } from './config';
 const CLIENT_ID = CLIENTID;
 const CLIENT_SECRET = CLIENTSECRET;
 const REFRESH_TOKEN = REFRESHTOKEN;
@@ -7,33 +7,33 @@ const REFRESH_TOKEN = REFRESHTOKEN;
 const Reddit = {
   async getSubredditPosts(subreddit) {
     const r = new snoowrap({
-      userAgent: "get-subreddit-posts",
+      userAgent: 'get-subreddit-posts',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
     });
     const retPost = await r.getSubreddit(subreddit).getHot();
-    console.log(retPost)
+    //console.log(retPost);
     return retPost;
   },
   //method to search through all of reddit's posts'
   async searchAllReddit(query) {
     const r = new snoowrap({
-      userAgent: "search-all-reddit",
+      userAgent: 'search-all-reddit',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
     });
     const searchResults = await r.search({
       query: query,
-      subreddit: "all",
-      sort: "relevance",
+      subreddit: 'all',
+      sort: 'relevance',
     });
     return searchResults;
   },
   async searchAllRedditBefore(query, beforeDate) {
     const r = new snoowrap({
-      userAgent: "search-all-reddit-before",
+      userAgent: 'search-all-reddit-before',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -42,8 +42,8 @@ const Reddit = {
     let searchResults = await r
       .search({
         query: query,
-        subreddit: "all",
-        sort: "relevance",
+        subreddit: 'all',
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -51,7 +51,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc < beforeDate
+      (post) => post.created_utc < beforeDate,
     );
 
     //console.log('here')
@@ -59,7 +59,7 @@ const Reddit = {
   },
   async searchAllRedditAfter(query, afterDate) {
     const r = new snoowrap({
-      userAgent: "search-all-reddit-after",
+      userAgent: 'search-all-reddit-after',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -68,8 +68,8 @@ const Reddit = {
     let searchResults = await r
       .search({
         query: query,
-        subreddit: "all",
-        sort: "relevance",
+        subreddit: 'all',
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -77,7 +77,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc > afterDate
+      (post) => post.created_utc > afterDate,
     );
 
     //console.log('here')
@@ -85,7 +85,7 @@ const Reddit = {
   },
   async searchAllRedditBeforeAfter(query, beforeDate, afterDate) {
     const r = new snoowrap({
-      userAgent: "search-all-reddit-before-after",
+      userAgent: 'search-all-reddit-before-after',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -94,8 +94,8 @@ const Reddit = {
     let searchResults = await r
       .search({
         query: query,
-        subreddit: "all",
-        sort: "relevance",
+        subreddit: 'all',
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -103,7 +103,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc > afterDate && post.created_utc < beforeDate
+      (post) => post.created_utc > afterDate && post.created_utc < beforeDate,
     );
 
     //console.log('here')
@@ -112,7 +112,7 @@ const Reddit = {
   //method to search through a specific subreddit's posts
   async searchThroughSubreddit(query, subreddit) {
     const r = new snoowrap({
-      userAgent: "search-a-subreddit",
+      userAgent: 'search-a-subreddit',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -120,13 +120,13 @@ const Reddit = {
     const searchResults = await r.search({
       query: query,
       subreddit: subreddit,
-      sort: "relevance",
+      sort: 'relevance',
     });
     return searchResults;
   },
   async searchThroughSubredditBefore(query, subreddit, beforeDate) {
     const r = new snoowrap({
-      userAgent: "search-sub-reddit-before",
+      userAgent: 'search-sub-reddit-before',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -136,7 +136,7 @@ const Reddit = {
       .search({
         query: query,
         subreddit: subreddit,
-        sort: "relevance",
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -144,7 +144,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc < beforeDate
+      (post) => post.created_utc < beforeDate,
     );
 
     //console.log('here')
@@ -152,7 +152,7 @@ const Reddit = {
   },
   async searchThroughSubredditAfter(query, subreddit, afterDate) {
     const r = new snoowrap({
-      userAgent: "search-sub-reddit-after",
+      userAgent: 'search-sub-reddit-after',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -162,7 +162,7 @@ const Reddit = {
       .search({
         query: query,
         subreddit: subreddit,
-        sort: "relevance",
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -170,7 +170,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc > afterDate
+      (post) => post.created_utc > afterDate,
     );
 
     //console.log('here')
@@ -180,10 +180,10 @@ const Reddit = {
     query,
     subreddit,
     beforeDate,
-    afterDate
+    afterDate,
   ) {
     const r = new snoowrap({
-      userAgent: "search-sub-reddit-before-after",
+      userAgent: 'search-sub-reddit-before-after',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -193,7 +193,7 @@ const Reddit = {
       .search({
         query: query,
         subreddit: subreddit,
-        sort: "relevance",
+        sort: 'relevance',
       })
       .fetchAll({ append: true });
 
@@ -201,7 +201,7 @@ const Reddit = {
     //let flag=true;
     //console.log('here1')
     returnResults = searchResults.filter(
-      (post) => post.created_utc > afterDate && post.created_utc < beforeDate
+      (post) => post.created_utc > afterDate && post.created_utc < beforeDate,
     );
 
     //console.log('here')
@@ -209,7 +209,7 @@ const Reddit = {
   },
   async searchForSubreddits(query) {
     const r = new snoowrap({
-      userAgent: "search-for-subreddit",
+      userAgent: 'search-for-subreddit',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,
@@ -219,14 +219,27 @@ const Reddit = {
     });
     return searchResults;
   },
-
+  async searchForFilteredSubreddits(query) {
+    const r = new snoowrap({
+      userAgent: 'search-for-subreddit-filtered',
+      clientId: CLIENT_ID,
+      clientSecret: CLIENT_SECRET,
+      refreshToken: REFRESH_TOKEN,
+    });
+    const searchResults = await r.searchSubredditNames({
+      query: query,
+      includeNsfw: false,
+    });
+    
+    return searchResults;
+  },
   async getSubreddit(subreddit) {
     //return subreddit icon, description
     //icon is community_icon
     //description is public_description
     let resultObject = {};
     const r = new snoowrap({
-      userAgent: "search-through-a-subreddit",
+      userAgent: 'search-through-a-subreddit',
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
       refreshToken: REFRESH_TOKEN,

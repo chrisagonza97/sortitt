@@ -83,3 +83,8 @@
 .post-grid-two{
     width: 25rem;
 }
+@media only screen and (min-width: 1024px){
+    .post-grid-two{
+        width: 50rem;
+    }
+}

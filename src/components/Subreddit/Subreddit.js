@@ -18,7 +18,7 @@ export const Subreddit = (props) => {
     if (props.subreddit !== 'all') {
       Reddit.getSubreddit(props.subreddit).then((result) => {
         //subRedditObj = result.toJSON();
-        console.log(result);
+        //console.log(result);
         setSubredditObject({ ...result });
       });
     }
