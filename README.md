@@ -1,1 +1,2 @@
-A react-redux reddit clone that also allows you to sort through posts by specific dates, instead of just by day, week, month, etc.
+# Sortitt
+Web application primarily using reddit's API. Sortitt (for lack of a better name) provides a minimal UI to browse through subreddits and to search through reddit. This application's primary feature is the ability to filter reddits
