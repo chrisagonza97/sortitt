@@ -22,34 +22,30 @@
   margin-top: 1rem;
   display: inline-block;
 }
-.input-container input{
-    width:75%
+.input-container input {
+  width: 75%;
 }
 .search-posts-container {
   margin: 0 1rem;
 
   display: grid;
-  grid-template-columns: 3fr 1fr 3fr ;
+  grid-template-columns: 3fr 1fr 3fr;
 }
 .subreddit-check {
   display: inline-block;
 }
-.date-picker{
-    max-width:6rem;
+.date-picker {
+  max-width: 6rem;
 }
-.check-flex-container{
-  display:flex;
+.check-flex-container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  
 }
-.label-flex-container{
-  
-  display:flex;
+.label-flex-container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  mergin-right:
-  
 }
 .snoo-tooltip {
   position: absolute;
@@ -99,6 +95,6 @@
 }
 .search-subs-butn {
   padding-left: 3rem;
-  display:grid;
+  display: grid;
   grid-template-rows: 1fr 1fr;
 }
