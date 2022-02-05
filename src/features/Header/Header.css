@@ -37,6 +37,20 @@
 .date-picker{
     max-width:6rem;
 }
+.check-flex-container{
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  
+}
+.label-flex-container{
+  
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  mergin-right:
+  
+}
 .snoo-tooltip {
   position: absolute;
   bottom: -20px;
@@ -68,11 +82,11 @@
 }
 .calendar-before {
   display: grid;
-  grid-template-columns: 3rem 1rem 10rem;
+  grid-template-columns: 4rem 1rem 10rem;
 }
 .calendar-after {
   display: grid;
-  grid-template-columns: 3rem 1rem 3rem;
+  grid-template-columns: 4rem 1rem 3rem;
 }
 .if-subreddit {
 }

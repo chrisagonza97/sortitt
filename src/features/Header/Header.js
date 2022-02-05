@@ -170,6 +170,7 @@ export const Header = () => {
               id='inlineRadio1'
               value='searchPosts'
             />
+            
             <label className='form-check-label' htmlFor='inlineRadio1'>
               Search reddit Posts
             </label>
@@ -190,32 +191,40 @@ export const Header = () => {
         </div>
         <div className='calendar-inputs'>
           <div className='calendar-before'>
-            <label htmlFor='before-checkbox'>Before</label>
-            <input
-              type='checkbox'
-              onChange={handleBeforeCheck}
-              checked={checkBefore}
-              id='before-checkbox'
-            />
-            <DatePicker
+            <div className='label-flex-container'><label htmlFor='before-checkbox'>Before</label></div>
+            
+            <div className='check-flex-container'>
+              <input
+                type='checkbox'
+                onChange={handleBeforeCheck}
+                checked={checkBefore}
+                id='before-checkbox'
+              />
+            </div>
+            <div className='label-flex-container'><DatePicker
               className='date-picker'
               onChange={(date) => setBeforeD(date)}
               selected={beforeDate}
-            />
+            /></div>
+            
           </div>
           <div className='calendar-after'>
-            <label htmlFor='after-checkbox'>After</label>
-            <input
-              type='checkbox'
-              onChange={handleAfterCheck}
-              checked={checkAfter}
-              id='after-checkbox'
-            />
-            <DatePicker
+            <div className='label-flex-container'><label htmlFor='after-checkbox'>After</label></div>
+            
+            <div className='check-flex-container'>
+              <input
+                type='checkbox'
+                onChange={handleAfterCheck}
+                checked={checkAfter}
+                id='after-checkbox'
+              />
+            </div>
+      <div className='label-flex-container'><DatePicker
               className='date-picker'
               onChange={(date) => setAfterD(date)}
               selected={afterDate}
-            />
+            /></div>
+            
           </div>
         </div>
         <div className='search-subs-butn'>
@@ -233,7 +242,6 @@ export const Header = () => {
               Search Subreddits
             </label>
           </div>
-          
         </div>
       </div>
       {/*</div>*/}
