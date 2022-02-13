@@ -39,7 +39,7 @@
     height: 0;
   }
 .thumbnail-wrapper{
-    width:100%;
+    width:95%;
     margin-left: 50px;
     
 }
@@ -86,5 +86,10 @@
 @media only screen and (min-width: 1024px){
     .post-grid-two{
         width: 50rem;
+    }
+}
+@media only screen and (max-width: 768px){
+    .post-details span {
+        font-size:10px;
     }
 }

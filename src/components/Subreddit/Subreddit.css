@@ -1,13 +1,13 @@
 .subreddit-card {
   display: grid;
-  grid-template-columns: 100px auto auto;
+  grid-template-columns: 1fr 2fr 1fr;
   min-height: 6rem;
   width:100%;
   background-color: #ffffff;
   border-radius: 10px;
   margin-bottom: 30px;
   margin-right: 20px;
-  margin-left: 20px;
+  margin-left: 0px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
 }
@@ -27,9 +27,13 @@
 }
 .sub-grid-container {
     display:grid;
-  grid-template-columns: 1fr 20fr 1fr;
+  grid-template-columns:1fr auto 1fr;
 }
-.sub-grid-two {
-
-  
+.sub-grid-two{
+  width: 25rem;
+}
+@media only screen and (min-width: 1024px){
+  .sub-grid-two{
+      width: 50rem;
+  }
 }

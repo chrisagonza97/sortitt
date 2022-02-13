@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 //import { setSearchTerm } from '../../store/redditSlice';
+import { HeaderModal } from './HeaderModal';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import {
   setSearchPosts,
   setSearchThisSub,
@@ -20,17 +23,13 @@ import './Header.css';
 
 export const Header = () => {
   const [searchTermLocal, setSearchTermLocal] = useState('');
-  const [beforeDate, setBeforeD] = useState(new Date());
-  const [afterDate, setAfterD] = useState(new Date());
-  const [checkBefore, setCheckBefore] = useState(false);
-  const [checkAfter, setCheckAfter] = useState(false);
+
   const searchTerm = useSelector((state) => state.search.searchTerm);
   const subreddit = useSelector((state) => state.reddit.selectedSub);
+  let searchPosts = useSelector((state) => state.search.searchPosts);
+  let searchThisSub = useSelector((state) => state.search.searchThisSub);
+  let searchSubreddits = useSelector((state) => state.search.searchSubreddits);
   const dispatch = useDispatch();
-
-  const [selectedRadio, setSelectedRadio] = useState('searchPosts');
-  const [searchSub, setSearchSub] = useState(true);
-  const [safeSearch, setSafeS] = useState(true);
 
   const handleChange = (e) => {
     setSearchTermLocal(e.target.value);
@@ -53,70 +52,15 @@ export const Header = () => {
       return;
     }
     dispatch(setSearchTerm(searchTermLocal));
-    let searchPosts;
-    let searchThisSub;
-    let searchSubreddits;
-
-    if (selectedRadio === 'searchPosts') {
-      searchPosts = true;
-      searchSubreddits = false;
-      if (searchSub) {
-        searchThisSub = true;
-        dispatch(setRendering('searchInSubreddit'));
-      } else {
-        searchThisSub = false;
-        dispatch(setRendering('searchAllPosts'));
-      }
-    } else {
-      searchPosts = false;
-      searchThisSub = false;
-      searchSubreddits = true;
+    if (searchSubreddits) {
       dispatch(setRendering('searchSubreddits'));
-    }
-    //console.log(beforeDate)
-    //set before date to beginning of day utc
-    beforeDate.setUTCHours(0, 0, 0, 0);
-    let newBefore = beforeDate;
-    setBeforeD(newBefore);
-    //set after date to end of day utc
-    afterDate.setUTCHours(23, 59, 59, 0);
-    let newAfter = afterDate;
-    setAfterD(newAfter);
-    //console.log(parseInt((beforeDate.getTime() / 1000).toFixed(0)));
-    dispatch(setBeforeDate(parseInt((beforeDate.getTime() / 1000).toFixed(0))));
-
-    dispatch(setAfterDate(parseInt((afterDate.getTime() / 1000).toFixed(0))));
-    //console.log(parseInt((afterDate.getTime() / 1000).toFixed(0)));
-    dispatch(setBeforeSearch(checkBefore));
-
-    dispatch(setAfterSearch(checkAfter));
-    dispatch(setSafeSearch(safeSearch));
-    dispatch(setSearchPosts(searchPosts));
-    dispatch(setSearchThisSub(searchThisSub));
-    dispatch(setSearchSubreddits(searchSubreddits));
-  };
-
-  const onRadioChange = (e) => {
-    setSelectedRadio(e.target.value);
-    if (e.target.value === 'searchSubs') {
-      setSearchSub(false);
+    } else if (searchPosts && searchThisSub === false) {
+      dispatch(setRendering('searchAllPosts'));
+    } else if (searchPosts && searchThisSub) {
+      dispatch(setRendering('searchInSubreddit'));
     }
   };
-  const onCheckClick = (e) => {
-    if (selectedRadio === 'searchSubs') {
-      setSelectedRadio('searchPosts');
-    }
-    setSearchSub(!searchSub);
-  };
-  const handleBeforeCheck = (e) => {
-    setCheckBefore(!checkBefore);
-  };
-  const handleAfterCheck = (e) => {
-    setCheckAfter(!checkAfter);
-  };
-  const handleSafeCheck = (e) => {
-    setSafeS(!safeSearch);
-  };
+
   return (
     <div className='header-container'>
       <div className='header'>
@@ -129,20 +73,24 @@ export const Header = () => {
           />
           <span className='snoo-tooltip'>Go Back To /r/all</span>
         </div>
-        <form className='searchBar' onSubmit={handleSubmit}>
+        <form className='search-bar' onSubmit={handleSubmit}>
           <div className='input-container'>
-            <input
-              type='text'
-              placeholder='Search reddit'
-              value={searchTermLocal}
-              onChange={handleChange}
-            />
-            <button type='submit' onClick={handleSubmit}>
+            <div className='textin-contain'>
+              <input
+                type='text'
+                placeholder='Search reddit'
+                value={searchTermLocal}
+                onChange={handleChange}
+                className='form-control textin'
+              />
+            </div>
+
+            <Button type='submit' onClick={handleSubmit}>
               <BsSearch />
-            </button>
+            </Button>
           </div>
           <div>
-            <input
+            {/*<input
               className='form-check-input'
               type='checkbox'
               onChange={handleSafeCheck}
@@ -153,12 +101,17 @@ export const Header = () => {
             />
             <label className='form-check-label' htmlFor='safe-search-btn'>
               Explicit Content Filter
-            </label>
+            </label>*/}
           </div>
         </form>
       </div>
       {/*<div className='search-params'>*/}
-      <div className='search-posts-container'>
+      {/*Instead of check boxes that take a bunch of space, put button to open modal*/}
+      <div className='modal-container'>
+        <HeaderModal />
+      </div>
+
+      {/*<div className='search-posts-container'>
         <div className='if-subreddit'>
           <div className='search-posts'>
             <input
@@ -170,7 +123,7 @@ export const Header = () => {
               id='inlineRadio1'
               value='searchPosts'
             />
-            
+
             <label className='form-check-label' htmlFor='inlineRadio1'>
               Search reddit Posts
             </label>
@@ -191,8 +144,10 @@ export const Header = () => {
         </div>
         <div className='calendar-inputs'>
           <div className='calendar-before'>
-            <div className='label-flex-container'><label htmlFor='before-checkbox'>Before</label></div>
-            
+            <div className='label-flex-container'>
+              <label htmlFor='before-checkbox'>Before</label>
+            </div>
+
             <div className='check-flex-container'>
               <input
                 type='checkbox'
@@ -201,16 +156,19 @@ export const Header = () => {
                 id='before-checkbox'
               />
             </div>
-            <div className='label-flex-container'><DatePicker
-              className='date-picker'
-              onChange={(date) => setBeforeD(date)}
-              selected={beforeDate}
-            /></div>
-            
+            <div className='label-flex-container'>
+              <DatePicker
+                className='date-picker'
+                onChange={(date) => setBeforeD(date)}
+                selected={beforeDate}
+              />
+            </div>
           </div>
           <div className='calendar-after'>
-            <div className='label-flex-container'><label htmlFor='after-checkbox'>After</label></div>
-            
+            <div className='label-flex-container'>
+              <label htmlFor='after-checkbox'>After</label>
+            </div>
+
             <div className='check-flex-container'>
               <input
                 type='checkbox'
@@ -219,12 +177,13 @@ export const Header = () => {
                 id='after-checkbox'
               />
             </div>
-      <div className='label-flex-container'><DatePicker
-              className='date-picker'
-              onChange={(date) => setAfterD(date)}
-              selected={afterDate}
-            /></div>
-            
+            <div className='label-flex-container'>
+              <DatePicker
+                className='date-picker'
+                onChange={(date) => setAfterD(date)}
+                selected={afterDate}
+              />
+            </div>
           </div>
         </div>
         <div className='search-subs-butn'>
@@ -243,7 +202,7 @@ export const Header = () => {
             </label>
           </div>
         </div>
-      </div>
+      </div>*/}
       {/*</div>*/}
     </div>
   );

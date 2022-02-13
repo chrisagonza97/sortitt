@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
   font-size: 16px;
+  
 }
 .header {
   display: grid;
@@ -18,6 +19,14 @@
   width: 100%;
   border-radius: 50%;
 }
+.modal-container{
+  display:flex;
+  justify-content: flex-end;
+  
+}
+.modal-btn{
+  margin-right:1rem;
+}
 .input-container {
   margin-top: 1rem;
   display: inline-block;
@@ -29,7 +38,10 @@
   margin: 0 1rem;
 
   display: grid;
-  grid-template-columns: 3fr 1fr 3fr;
+  grid-template-rows: auto auto auto ;
+  grid-gap: 0.5rem;
+  
+  
 }
 .subreddit-check {
   display: inline-block;
@@ -86,15 +98,33 @@
 }
 .if-subreddit {
 }
-.searchBar {
+.search-bar {
   display: grid;
-  grid-template-columns: 12rem auto;
+  grid-template-columns: 16rem auto;
+}
+.textin-contain{
+  display: inline;
+}
+.textin{
+  display: inline;
+  padding-right:0px;
+  margin-right:0px;
 }
 .calendar-inputs {
   max-width: 11rem;
 }
 .search-subs-butn {
-  padding-left: 3rem;
+  
   display: grid;
   grid-template-rows: 1fr 1fr;
+}
+@media only screen and (min-width: 1024px) {
+  .modal-container{
+    display:flex;
+    justify-content: left;
+    
+  }
+  .modal-btn{
+    margin-left: 6.2rem;
+  }
 }

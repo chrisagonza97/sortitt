@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Post.css';
 import Time from '../../util/Time';
+import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 //
 export const Post = (props) => {
   //console.log(props.post)
@@ -21,13 +22,13 @@ export const Post = (props) => {
             <div className='votes-title'>
               <div className='upvotes-wrapper'>
                 <div className='upvotes'>
-                  <i className='fas fa-arrow-up fa-2x vote-up'></i>
+                  <FaArrowUp/>
 
                   <span className='ups-num'>
                     <strong>{props.post.ups}</strong>
                   </span>
 
-                  <i className='fas fa-arrow-down fa-2x vote-down'></i>
+                  <FaArrowDown/>
                 </div>
               </div>
               <div className='title'>

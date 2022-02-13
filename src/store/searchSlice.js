@@ -5,8 +5,8 @@ const initialState= {
     searchPosts:true,
     searchThisSub:false,
     searchSubreddits: false,
-    beforeDate:'',
-    afterDate:'',
+    beforeDate: new Date(),
+    afterDate:new Date(),
     beforeSearch:false,
     afterSearch:false,
     safeSearch:true
